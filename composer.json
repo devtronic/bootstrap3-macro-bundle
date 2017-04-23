@@ -1,0 +1,19 @@
+{
+  "name": "devtronic/bootstrap3-macro-bundle",
+  "description": "Bootstrap 3 Macros for Twig",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Julian Finkler",
+      "email": "admin@developer-heaven.de"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Devtronic\\Bootstrap3MacroBundle\\": ""
+    }
+  }
+}

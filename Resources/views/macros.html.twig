@@ -1,0 +1,174 @@
+{#
+ #
+ # This file is part of the Devtronic Bootstrap3 Macro Bundle package.
+ #
+ # (c) Julian Finkler <admin@developer-heaven.de>
+ #
+ # For the full copyright and license information, please read the LICENSE
+ # file that was distributed with this source code.
+ #
+ # Copyright (c) 2017 by Julian Finkler
+ #}
+
+{# Internal Macros #}
+{% macro createTag(tagName, attributes, innerHtml, selfClosing) %}
+    {% set tmpAttributes = [] %}
+    {% if attributes is defined and attributes is iterable %}
+        {% for key, val in attributes %}
+            {% set tmpAttributes = tmpAttributes | merge(['%s="%s"' | format(key, val)]) %}
+        {% endfor %}
+    {% endif %}
+    <{{ tagName }} {{ tmpAttributes | join(' ') | raw }}>
+    {% if innerHtml is defined and innerHtml | length > 0 %}
+        {{ innerHtml | raw }}
+    {% endif %}
+    {% if selfClosing is defined and selfClosing == true %}
+        />
+    {% else %}
+        </{{ tagName }}>
+    {% endif %}
+{% endmacro %}
+
+{% macro dropdownMenu(items) %}
+    <ul class="dropdown-menu">
+        {% if items is defined and items is iterable %}
+            {% for item in items %}
+                {% set attributes = {} %}
+                {% set text = null %}
+                {% set class = [] %}
+                {% set class = item.active is defined and item.active == true ? class | merge(['active']) : class %}
+                {% set class = item.disabled is defined and item.disabled == true ? class | merge(['disabled']) : class %}
+                {% if item.href is defined %}
+                    {% set text = _self.createTag('a', {'href': item.href}, item.text) %}
+                {% elseif item is not iterable and item == 'separator' %}
+                    {% set attributes = attributes | merge({'role': 'separator'}) %}
+                    {% set class = ['divider'] %}
+                {% elseif item is not iterable %}
+                    {% set class = ['dropdown-header'] %}
+                    {% set text = item %}
+                {% endif %}
+                {% set attributes = attributes | merge({'class': class | join(' ')}) %}
+                {{ _self.createTag('li', attributes, text) }}
+            {% endfor %}
+        {% endif %}
+    </ul>
+{% endmacro %}
+
+{% macro buttonElement(text, href, class, attr) %}
+
+    {% set attributes = attr is defined and attr != null and attr is iterable ? attr : {} %}
+    {% set tagName = href is defined and href != null ? 'a' : 'button' %}
+    {% if tagName == 'a' %}
+        {% set attributes = attributes | merge({'href': href}) %}
+    {% else %}
+        {% set attributes = attributes | merge({'type': 'button'}) %}
+    {% endif %}
+
+    {% set class = class is not defined or class is empty ? 'btn-default' : class %}
+    {% set attributes = attributes | merge({'class': 'btn '~ class}) %}
+
+    {{ _self.createTag(tagName, attributes, text) }}
+{% endmacro %}
+{# End Internal Macros #}
+
+{# Dropdown #}
+{% macro dropdown(text, items, btnClass, isDropup) %}
+    {% set btnClass = btnClass is not defined or btnClass is empty ? 'btn-default' : btnClass %}
+    {% set menuClass = isDropup == true ? 'dropup' : 'dropdown' %}
+    <div class="{{ menuClass }}">
+        <button class="btn {{ btnClass }} dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="true">
+            {{ text }}
+            <span class="caret"></span>
+        </button>
+        {{ _self.dropdownMenu(items) }}
+    </div>
+{% endmacro %}
+{# End Dropdown #}
+
+{# Button Group #}
+{% macro buttonGroup(items) %}
+    <div class="btn-group" role="group">
+        {% if items is defined and items is iterable %}
+            {% for item in items %}
+                {{ _self.buttonElement(
+                item.text,
+                item.href is defined ? item.href : null,
+                item.class is defined ? item.class : null,
+                item.attr is defined ? item.attr : null
+                ) }}
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endmacro %}
+{# End Button Group #}
+
+{# Button Toolbar #}
+{% macro buttonToolbar(groups) %}
+    <div class="btn-toolbar" role="toolbar">
+        {% if groups is defined and groups is iterable %}
+            {% for items in groups %}
+                {{ _self.buttonGroup(items) }}
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endmacro %}
+{# End Button Toolbar #}
+
+{# Single Button Dropdown #}
+{% macro singleButtonDropdown(button, items, isDropup) %}
+    {% set btnClass = btnClass is not defined or btnClass is empty ? 'btn-default' : btnClass %}
+    {% set menuClass = isDropup == true ? 'dropup' : '' %}
+    <div class="btn-group {{ menuClass }}">
+
+        {% set attr = button.attr is defined and button.attr is iterable ? button.attr : {} %}
+        {% set attr = attr | merge({'data-toggle': 'dropdown', 'aria-haspopup': 'true', 'aria-expanded': 'false'}) %}
+
+        {% set class = button.class is defined and button.class is not null ? button.class : '' %}
+        {% set class = class ~ ' dropdown-toggle' %}
+
+        {{ _self.buttonElement(
+        button.text ~ ' <span class="caret"></span>',
+        button.href is defined ? button.href : null,
+        class,
+        attr
+        ) }}
+
+        {{ _self.dropdownMenu(items) }}
+    </div>
+{% endmacro %}
+{# End Single Button Dropdown #}
+
+{# Split Button Dropdown #}
+{% macro splitButtonDropdown(button, items, isDropup) %}
+    {% set menuClass = isDropup == true ? 'dropup' : '' %}
+    <div class="btn-group {{ menuClass }}">
+        {% set class = button.class is defined and button.class != null ? button.class : 'btn-default' %}
+
+        {{ _self.buttonElement(
+        button.text,
+        button.href is defined ? button.href : null,
+        class,
+        button.attr is defined and button.attr is iterable ? button.attr : null
+        ) }}
+        <button type="button" class="btn {{ class }} dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+            <span class="caret"></span>
+        </button>
+        {{ _self.dropdownMenu(items) }}
+    </div>
+{% endmacro %}
+{# End Split Button Dropdown #}
+
+{% macro tabs(links) %}
+    <ul class="nav nav-tabs">
+        {% for link in links %}
+            {% set params = link.params is defined ? link.params : {} %}
+            {% set current_route = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+            {% set class = current_route == link.href ? 'class="active"' : '' %}
+            <li role="presentation" {{ class | raw }}>
+                <a href="{{ link.href }}">{{ link.text | raw }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endmacro %}
