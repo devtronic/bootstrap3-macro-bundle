@@ -1,3 +1,7 @@
+[← 2. Button Group / Button Toolbar](./02_button_group.md) | [Return to index](index.md) | [4. Navs →](./04_navs.md)
+
+---
+
 # Button Dropdowns
 
 ## Single Button Dropdowns
@@ -43,3 +47,7 @@
 ], false) }}
 ```
 ![Result](./img/split_button_dropdown_example.png)
+
+---
+
+[← 2. Button Group / Button Toolbar](./02_button_group.md) | [Return to index](index.md) | [4. Navs →](./04_navs.md)

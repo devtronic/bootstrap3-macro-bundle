@@ -1,3 +1,7 @@
+[← 1. Dropdowns](./01_dropdowns.md) | [Return to index](index.md) | [3. Button Dropdown →](./03_button_dropdowns.md)
+
+---
+
 # Button Group / Button Toolbar
 
 ## Button Group
@@ -43,3 +47,7 @@
 ]) }}
 ```
 ![Result](./img/button_toolbar_example.png)
+
+---
+
+[← 1. Dropdowns](./01_dropdowns.md) | [Return to index](index.md) | [3. Button Dropdown →](./03_button_dropdowns.md)

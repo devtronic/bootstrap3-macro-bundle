@@ -1,3 +1,7 @@
+[Return to index](index.md) | [2. Button Group / Button Toolbar →](./02_button_group.md)
+
+---
+
 # Dropdowns
 
 ## Description
@@ -22,3 +26,7 @@
 ], 'btn-danger', false) }}
 ```
 ![Result](./img/dropdown_example.png)
+
+---
+
+[Return to index](index.md) | [2. Button Group / Button Toolbar →](./02_button_group.md)

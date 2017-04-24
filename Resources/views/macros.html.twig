@@ -69,6 +69,18 @@
 
     {{ _self.createTag(tagName, attributes, text) }}
 {% endmacro %}
+
+{% macro navElement(item) %}
+    {% set attr = {role: 'presentation'} %}
+    {% set class = [] %}
+    {% set class = item.active is defined and item.active == true ? class | merge(["active"]) : class %}
+    {% set class = item.disabled is defined and item.disabled == true ? class | merge(["disabled"]) : class %}
+    {% set attr = class | length > 0 ? attr | merge({'class': class | join(' ')}) : attr %}
+
+    {% set link %}<a href="{{ item.href }}">{{ item.text }}</a>{% endset %}
+    {{ _self.createTag('li', attr, link) }}
+    <li role="presentation" class="active"></li>
+{% endmacro %}
 {# End Internal Macros #}
 
 {# Dropdown #}
@@ -160,15 +172,29 @@
 {% endmacro %}
 {# End Split Button Dropdown #}
 
-{% macro tabs(links) %}
-    <ul class="nav nav-tabs">
-        {% for link in links %}
-            {% set params = link.params is defined ? link.params : {} %}
-            {% set current_route = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
-            {% set class = current_route == link.href ? 'class="active"' : '' %}
-            <li role="presentation" {{ class | raw }}>
-                <a href="{{ link.href }}">{{ link.text | raw }}</a>
-            </li>
-        {% endfor %}
+{# Tabs #}
+{% macro tabs(items, isJustified) %}
+    {% set justifiedClass = isJustified is defined and isJustified == true ? 'nav-justified' : '' %}
+    <ul class="nav nav-tabs {{ justifiedClass }}">
+        {% if items is defined and items is iterable %}
+            {% for item in items %}
+                {{ _self.navElement(item) }}
+            {% endfor %}
+        {% endif %}
     </ul>
 {% endmacro %}
+{# End Tabs #}
+
+{# Pills #}
+{% macro pills(items, isJustified, isStacked) %}
+    {% set stackedClass = isStacked is defined and isStacked == true ? 'nav-stacked' : '' %}
+    {% set justifiedClass = isJustified is defined and isJustified == true ? 'nav-justified' : '' %}
+    <ul class="nav nav-pills {{ stackedClass }} {{ justifiedClass }}">
+        {% if items is defined and items is iterable %}
+            {% for item in items %}
+                {{ _self.navElement(item) }}
+            {% endfor %}
+        {% endif %}
+    </ul>
+{% endmacro %}
+{# End Pills #}

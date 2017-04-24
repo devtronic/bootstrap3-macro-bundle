@@ -8,8 +8,6 @@ To display a separator, add a string-entry to the item collection with the value
 All other strings will be displayed as Headings.
 
 ### Linked Item
-A linked item must be an instance of dictionary with the following properties.
-
 | Field     | Type    | Description                                       |
 |:----------|:-------:|:--------------------------------------------------|
 | text      | string  | The displayed text of the item                    |
@@ -31,3 +29,15 @@ the tag is `a`, otherwise `button`
 | attr       | dictionary | Additional tag attributes                                         |
 
 **Example**: `{text: 'My Button', attr: {'ID': 'myButton1', 'onclick': 'alert(\'Hello World\')'}}`
+
+## Nav Item
+A nav item must be an instance of dictionary with the following properties.
+
+| Field     | Type    | Description                                       |
+|:----------|:-------:|:--------------------------------------------------|
+| text      | string  | The displayed text of the item                    |
+| href      | string  | The link of the Item                              |
+| active    | boolean | If true, the item will be highlighted as "active" |
+| disabled  | boolean | If true, the item is disabled                     |
+
+**Example**: `{href: '#', text: 'Profile', active: true}`
