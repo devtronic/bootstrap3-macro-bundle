@@ -244,3 +244,15 @@
     </div>
 {% endmacro %}
 {# End Jumbotron #}
+
+{# Page Header #}
+{% macro pageHeader(title, subtext) %}
+    <div class="page-header">
+        {% set sub = '' %}
+        {% if subtext is defined and subtext | trim | length > 0 %}
+            {% set sub = ' ' ~ _self.createTag('small', {}, subtext) %}
+        {% endif %}
+        {{ _self.createTag('h1', {}, title ~ sub ) }}
+    </div>
+{% endmacro %}
+{# End Page Header #}

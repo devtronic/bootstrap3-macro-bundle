@@ -21,6 +21,7 @@ $index = [
     ],
     ['name' => 'Breadcrumbs', 'file' => './05_breadcrumbs.md'],
     ['name' => 'Jumbotron', 'file' => './06_jumbotron.md'],
+    ['name' => 'Page Header', 'file' => './07_page_header.md'],
 ];
 
 $chapter = 0;

@@ -1,4 +1,4 @@
-[← 5. Breadcrumbs](./05_breadcrumbs.md) | [Return to index](index.md)
+[← 5. Breadcrumbs](./05_breadcrumbs.md) | [Return to index](index.md) | [7. Page Header →](./07_page_header.md)
 
 ---
 
@@ -27,4 +27,4 @@
 
 ---
 
-[← 5. Breadcrumbs](./05_breadcrumbs.md) | [Return to index](index.md)
+[← 5. Breadcrumbs](./05_breadcrumbs.md) | [Return to index](index.md) | [7. Page Header →](./07_page_header.md)
