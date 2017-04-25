@@ -1,4 +1,4 @@
-[← 4. Navs](./04_navs.md) | [Return to index](index.md)
+[← 4. Navs](./04_navs.md) | [Return to index](index.md) | [6. Jumbotron →](./06_jumbotron.md)
 
 ---
 
@@ -22,4 +22,4 @@
 
 ---
 
-[← 4. Navs](./04_navs.md) | [Return to index](index.md)
+[← 4. Navs](./04_navs.md) | [Return to index](index.md) | [6. Jumbotron →](./06_jumbotron.md)

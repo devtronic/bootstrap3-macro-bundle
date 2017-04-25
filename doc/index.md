@@ -10,3 +10,4 @@
     - [Tabs](./04_navs.md#tabs)
     - [Pills](./04_navs.md#pills)
 5. [Breadcrumbs](./05_breadcrumbs.md)
+6. [Jumbotron](./06_jumbotron.md)

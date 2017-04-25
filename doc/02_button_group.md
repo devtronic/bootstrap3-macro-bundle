@@ -11,7 +11,7 @@
 
 | Field          | Type    | Description                                                |
 |:---------------|:-------:|:-----------------------------------------------------------|
-| items          | array   | Array of [Button Element](./types.md#button-element) |
+| items          | array   | Array of [Button Element](./types.md#button-element)       |
 
 ### Example
 ```twig

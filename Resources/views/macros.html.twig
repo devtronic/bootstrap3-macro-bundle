@@ -215,3 +215,32 @@
     </ol>
 {% endmacro %}
 {# End Breadcrumbs #}
+
+{# Jumbotron #}
+{% macro jumbotron(heading, paragraphs, actionButton) %}
+    <div class="jumbotron">
+        <h1>{{ heading }}</h1>
+        {% if paragraphs is defined and paragraphs is iterable %}
+            {% for paragraph in paragraphs %}
+                <p>{{ paragraph | raw }}</p>
+            {% endfor %}
+        {% endif %}
+
+        {% if actionButton is defined and actionButton is iterable %}
+            {% if actionButton.class is defined %}
+                {% set actionButton = actionButton | merge({class: actionButton.class ~ ' btn-lg'}) %}
+            {% else %}
+                {% set actionButton = actionButton | merge({class: 'btn-default btn-lg'}) %}
+            {% endif %}
+            <p>
+                {{ _self.buttonElement(
+                actionButton.text,
+                actionButton.href is defined ? actionButton.href : null,
+                actionButton.class is defined ? actionButton.class : null,
+                actionButton.attr is defined ? actionButton.attr : null
+                ) }}
+            </p>
+        {% endif %}
+    </div>
+{% endmacro %}
+{# End Jumbotron #}

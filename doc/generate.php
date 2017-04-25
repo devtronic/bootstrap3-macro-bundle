@@ -20,6 +20,7 @@ $index = [
         ]
     ],
     ['name' => 'Breadcrumbs', 'file' => './05_breadcrumbs.md'],
+    ['name' => 'Jumbotron', 'file' => './06_jumbotron.md'],
 ];
 
 $chapter = 0;
