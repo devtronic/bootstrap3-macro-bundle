@@ -41,3 +41,13 @@ A nav item must be an instance of dictionary with the following properties.
 | disabled  | boolean | If true, the item is disabled                     |
 
 **Example**: `{href: '#', text: 'Profile', active: true}`
+
+## Link
+A link must be an instance of dictionary with the following properties.
+
+| Field     | Type    | Description                                       |
+|:----------|:-------:|:--------------------------------------------------|
+| text      | string  | The displayed text of the item                    |
+| href      | string  | The link                                          |
+
+**Example**: `{href: '#', text: 'Profile'}`

@@ -198,3 +198,20 @@
     </ul>
 {% endmacro %}
 {# End Pills #}
+
+{# Breadcrumbs #}
+{% macro breadcrumbs(items) %}
+    <ol class="breadcrumb">
+        {% if items is defined and items is iterable %}
+            {% for item in items %}
+                {% set class = loop.last ? 'class="active"' : '' %}
+                {% set text = item.text %}
+                {% if item.href is defined and loop.last == false %}
+                    {% set text = _self.createTag('a', {'href': item.href}, text) %}
+                {% endif %}
+                <li {{ class }}>{{ text }}</li>
+            {% endfor %}
+        {% endif %}
+    </ol>
+{% endmacro %}
+{# End Breadcrumbs #}

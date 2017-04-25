@@ -19,6 +19,7 @@ $index = [
             ['name' => 'Pills', 'anchor' => 'pills'],
         ]
     ],
+    ['name' => 'Breadcrumbs', 'file' => './05_breadcrumbs.md'],
 ];
 
 $chapter = 0;
